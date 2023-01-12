@@ -13,11 +13,21 @@
     <h3 id="h3">Name: </h3>
     <ul id="ul"></ul>
 
+    <input id="in" type="text">
+
     <script>
+
         function send_request() {
             var data;
-            
-            fetch('https://api.nationalize.io/?name=jan')
+            var name = document.getElementById('in').value
+            var ul = document.getElementById('ul')
+
+            while( ul.firstChild ){
+                ul.removeChild( ul.firstChild );
+}
+
+
+            fetch('https://api.nationalize.io/?name=' + name)
                 .then(response => response.json())
                 .then(json => data=json)
                 .then(() => {
