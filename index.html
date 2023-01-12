@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API</title>
+</head>
+<body>
+    <h1>Click button to send HTTP GET request and write data to console</h1>
+    <button onclick="send_request()">Send request</button>
+
+    <h3 id="h3">Name: </h3>
+    <ul id="ul"></ul>
+
+    <script>
+        function send_request() {
+            var data;
+            
+            fetch('https://api.nationalize.io/?name=jan')
+                .then(response => response.json())
+                .then(json => data=json)
+                .then(() => {
+                    document.getElementById('h3').innerHTML = "Name: " + data['name']
+                    var ul = document.getElementById('ul')
+                    country = data['country']
+
+                    country.forEach(element => {
+                        var li = document.createElement('li');
+                        li.setAttribute('class','item');
+                        ul.appendChild(li);
+                        li.innerHTML="Country ID: " + element['country_id'] + " probability: " + element['probability'] 
+                    });
+                    });
+        }
+
+    </script>
+</body>
+</html>
